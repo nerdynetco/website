@@ -1,6 +1,6 @@
 # Nerdy Network
 
-**Nerdy Network** is a builder-focused social platform for college students - think GitHub + Twitter + Hogwarts for student builders. It's where students log their daily progress, compete in house challenges, and build in public together.
+**Nerdy Network** is a builder-focused social platform for nerds - think GitHub + Twitter + Hogwarts for builders. It's where nerds log their daily progress, compete in house challenges, and build in public together.
 
 ## What is Nerdy Network?
 
