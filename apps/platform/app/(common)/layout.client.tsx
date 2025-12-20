@@ -1,23 +1,33 @@
-"use client"
+"use client";
 
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { authClient } from "~/auth/client";
 
 export function LayoutClient() {
-    const {data,isPending} = authClient.useSession()
-    const router = useRouter();
-    const pathname = usePathname()
+  const { data, isPending } = authClient.useSession();
+  const router = useRouter();
+  const pathname = usePathname();
 
-    useEffect(()=>{
-        if(isPending) return;
-        if(data?.user?.id){
-            if(pathname === "/sorting") return;
-            if (!(data?.user?.house && data?.user?.hasCompletedSorting)) {
-                router.push("/sorting")
-            }
-        }
-    },[isPending,data,pathname])
+  useEffect(() => {
+    if (isPending) return;
+    if (!data?.user?.id) return;
 
-    return null;
+    const isSorted =
+      Boolean(data.user.house) && Boolean(data.user.hasCompletedSorting);
+
+    // User not sorted → always go to /sorting
+    if (!isSorted && pathname !== "/sorting") {
+      router.replace("/sorting");
+      return;
+    }
+
+    // User already sorted → block /sorting
+    if (isSorted && pathname === "/sorting") {
+      router.replace("/");
+      return;
+    }
+  }, [isPending, data, pathname, router]);
+
+  return null;
 }
