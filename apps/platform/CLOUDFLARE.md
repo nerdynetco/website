@@ -119,9 +119,9 @@ Create a `wrangler.jsonc` file in the root of your project with the following co
      * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
      */
   "vars": {
-    "EMAIL_FROM": "no-reply@notifications.nith.eu.org",
-    "EMAIL_FROM_NAME": "College Platform",
-    "EMAIL_REPLY_TO": "support@nith.eu.org"
+    "EMAIL_FROM": "contact@nerdynet.co",
+    "EMAIL_FROM_NAME": "nerdy-network",
+    "EMAIL_REPLY_TO": "support@nerdynet.co"
   },
   /**
      * Note: Use secrets to store sensitive data.

@@ -40,7 +40,7 @@ export const orgConfig = {
         "@type": "ContactPoint",
         contactType: "Contact",
         telephone: "+91-8299284936",
-        email: "contact@nith.ac.in",
+        email: "contact@nerdynet.co",
       },
     },
   },

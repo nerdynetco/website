@@ -26,15 +26,13 @@ export const metadata: Metadata = {
     canonical: "/polls",
   },
   keywords: [
-    "NITH",
+    "nerds in the house",
     "Polls",
-    "NITH Polls",
-    "NITH Polling",
-    "NITH Voting",
-    "NITH Community Polls",
-    "NITH Community Voting",
-    "NITH Student Polls",
-    "NITH Student Voting",
+    "nerds Polls",
+    "nerds Polling",
+    "nerds Voting",
+    "nerds Community Polls",
+    "nerds Community Voting",
   ],
 };
 
