@@ -11,9 +11,9 @@ export const orgConfig = {
   // Enhanced social profiles
   socials: {
     twitter: {
-      url: "https://twitter.com/nerdynetworkco",
-      handle: "@nerdynetworkco",
-      publisher: "@nerdynetworkco",
+      url: "https://twitter.com/thenerdynet",
+      handle: "@thenerdynet",
+      publisher: "@thenerdynet",
     },
     linkedin: "https://linkedin.com/company/nerdynetworkco",
     instagram: "https://instagram.com/nerdynetworkco",
@@ -83,10 +83,10 @@ export const appConfig = {
     "https://github.com/nerdynetco/website",
   githubUri: "pro-nerdynetco/website",
   socials: {
-    twitter: "https://twitter.com/nerdynetworkco",
-    linkedin: "https://linkedin.com/in/nerdynetworkco",
-    instagram: "https://instagram.com/nerdynetworkco",
-    github: "https://github.com/nerdynetwork",
+    twitter: "https://twitter.com/thenerdynet",
+    linkedin: "https://linkedin.com/in/nerdy-network",
+    instagram: "https://instagram.com/the_nerdy_network",
+    github: "https://github.com/nerdynetco",
     website: "https://nerdynet.co/",
   },
 
