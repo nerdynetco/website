@@ -5,7 +5,6 @@ import { AppSidebar } from "@/components/common/sidebar/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import type { Session } from "~/auth";
 import { getSession } from "~/auth/server";
 
 export const dynamic = "force-dynamic";
