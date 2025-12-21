@@ -264,8 +264,19 @@ export const getNavLinks = (user?: Session["user"]): NavLink[] => {
         index ===
         self.findIndex((l) => l.href === link.href && l.title === link.title)
     );
-  // console.log("Links by role:", linksByRole);
 
+if (user) {
+  linksByRole.push({
+    title: "Settings",
+    href: "/user/settings",
+    description: "User settings.",
+    Icon: PiGearDuotone,
+    category: "dashboard",
+    allowed_roles: ["*"],
+  });
+}
+
+  // console.log("Links by role:", linksByRole);
 if (user?.role === ROLES_ENUMS.ADMIN) {
   linksByRole.push({
     title: "Dashboard",
@@ -285,7 +296,6 @@ if (user?.role === ROLES_ENUMS.ADMIN) {
     allowed_roles: [ROLES_ENUMS.ADMIN],
   });
 }
-
   // if(process.env.NODE_ENV !== "production"){
 if (!linksByRole.some(l => l.title === "Findr")) {
       linksByRole.push({

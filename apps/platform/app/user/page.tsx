@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import { getSession } from "~/auth/server";
 
+export const dynamic = "force-dynamic";
+
 export default async function UserPage() {
   const session = await getSession();
 
