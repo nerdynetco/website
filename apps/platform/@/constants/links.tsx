@@ -266,26 +266,26 @@ export const getNavLinks = (user?: Session["user"]): NavLink[] => {
     );
   // console.log("Links by role:", linksByRole);
 
-  if (user) {
-   linksByRole.push({
-      title: "Dashboard",
-      href: "/" + user.role,
-      description: "Manage your account settings.",
-      Icon: PiSquaresFourDuotone,
-      category: "dashboard",
-      allowed_roles: ["*"],
-    });
-    linksByRole.push({
-      title: "Settings",
-      href: user.role + "/settings",
-      description: "Manage your account settings.",
-      Icon: PiGearDuotone,
-      category: "dashboard",
-      allowed_roles: ["*"],
-    });
+if (user?.role === ROLES_ENUMS.ADMIN) {
+  linksByRole.push({
+    title: "Dashboard",
+    href: "/admin",
+    description: "Admin dashboard",
+    Icon: PiSquaresFourDuotone,
+    category: "dashboard",
+    allowed_roles: [ROLES_ENUMS.ADMIN],
+  });
 
+  linksByRole.push({
+    title: "Settings",
+    href: "/admin/settings",
+    description: "Admin settings",
+    Icon: PiGearDuotone,
+    category: "dashboard",
+    allowed_roles: [ROLES_ENUMS.ADMIN],
+  });
+}
 
-  }
   // if(process.env.NODE_ENV !== "production"){
 if (!linksByRole.some(l => l.title === "Findr")) {
       linksByRole.push({
@@ -363,23 +363,6 @@ type SideNavLink = {
 export const getSideNavLinks = (role: string, prefixPath?: string, hostelSlug?: string | null): SideNavLink[] => {
   // Create a shallow copy of the array to avoid mutating the original
   let sidebar_links_modified = [...sidebar_links];
-
-  // REMOVED - Hostel system deleted
-  // if (hostelAccessRoles.includes(role as typeof hostelAccessRoles[number]) && hostelSlug) {
-  //   sidebar_links_modified.splice(-2, 0, {
-  //     title: "Hostel Actions",
-  //     icon: PiBuildingsDuotone,
-  //     path: `/h/${hostelSlug}`,
-  //     allowed_roles: hostelAccessRoles,
-  //     category: "view",
-  //     items: getHostelRoutes(role, hostelSlug).map((route) => ({
-  //       title: route.title,
-  //       path: route.href.replace(`/${role}/h/${hostelSlug}`, ""),
-  //       allowed_roles: hostelAccessRoles,
-  //       disabled: route?.disabled,
-  //     })),
-  //   })
-  // }
 
   return sidebar_links_modified
     .filter(
