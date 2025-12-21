@@ -113,9 +113,6 @@ export default function SignUpForm() {
                     />
                   </FormControl>
                 </div>
-                <p className="text-[10px] text-muted-foreground/80 font-medium pt-1">
-                   Only {orgConfig.mailSuffix} emails are allowed.
-                </p>
                 <FormMessage />
               </FormItem>
             )}
