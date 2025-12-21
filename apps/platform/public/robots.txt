@@ -7,4 +7,4 @@ Disallow: /staff/
 
 Allow: /
 
-Sitemap: https://nith.eu.org/sitemap.xml
+Sitemap: https://nerdynet.co/sitemap.xml

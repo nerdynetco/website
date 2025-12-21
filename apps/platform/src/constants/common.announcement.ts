@@ -7,7 +7,6 @@ export const RELATED_FOR_TYPES = [
   "culturalEvents",
   "techEvents",
   "workshops",
-  "bloodDonation",
   "others",
 ] as const;
 

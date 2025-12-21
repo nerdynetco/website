@@ -66,7 +66,7 @@ export default async function AnnouncementsPage(props: {
               <div>
                 <h1 className="text-sm font-bold leading-none">Newsroom</h1>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Latest campus updates
+                  Latest updates
                 </p>
               </div>
             </div>

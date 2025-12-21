@@ -134,7 +134,7 @@ export default async function CommunitiesPage(props: {
               </h2>
 
               <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                {activeCategory?.description || "Welcome to the NITH community forum. A place to share ideas, ask questions, and connect with peers."}
+                {activeCategory?.description || "Welcome to the nerds community forum. A place to share ideas, ask questions, and connect with peers."}
               </p>
 
               <div className="flex gap-4 mt-4 py-4 border-t border-b border-border/50">
