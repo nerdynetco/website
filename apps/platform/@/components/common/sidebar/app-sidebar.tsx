@@ -52,7 +52,7 @@ export function AppSidebar({
               size="lg"
               asChild
             >
-              <Link href={`/${prefixPath ? prefixPath : moderator}`}>
+              <Link href="/">
                 <ApplicationSvgLogo className="!size-8" />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">
