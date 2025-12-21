@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Home } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type HouseName = "Gryffindor" | "Slytherin" | "Ravenclaw" | "Hufflepuff";
+type HouseName = "KERNEL" | "FRACTAL" | "SIGNAL" | "VECTOR";
 
 interface HouseBadgeProps {
   house: HouseName | string | null;
@@ -12,22 +12,22 @@ interface HouseBadgeProps {
 }
 
 const houseColors: Record<HouseName, { bg: string; text: string; border: string }> = {
-  Gryffindor: {
+  KERNEL: {
     bg: "bg-red-500/10 dark:bg-red-500/20",
     text: "text-red-700 dark:text-red-400",
     border: "border-red-500/30",
   },
-  Slytherin: {
+  FRACTAL: {
     bg: "bg-green-500/10 dark:bg-green-500/20",
     text: "text-green-700 dark:text-green-400",
     border: "border-green-500/30",
   },
-  Ravenclaw: {
+  SIGNAL: {
     bg: "bg-blue-500/10 dark:bg-blue-500/20",
     text: "text-blue-700 dark:text-blue-400",
     border: "border-blue-500/30",
   },
-  Hufflepuff: {
+  VECTOR: {
     bg: "bg-yellow-500/10 dark:bg-yellow-500/20",
     text: "text-yellow-700 dark:text-yellow-400",
     border: "border-yellow-500/30",
@@ -101,10 +101,10 @@ export function getHouseColors(house: HouseName | string | null) {
  * House icon/emoji mapping
  */
 export const houseEmojis: Record<HouseName, string> = {
-  Gryffindor: "🦁",
-  Slytherin: "🐍",
-  Ravenclaw: "🦅",
-  Hufflepuff: "🦡",
+  KERNEL: "🦁",
+  FRACTAL: "🐍",
+  SIGNAL: "🦅",
+  VECTOR: "🦡",
 };
 
 export function getHouseEmoji(house: HouseName | string | null): string {

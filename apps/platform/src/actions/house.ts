@@ -8,7 +8,7 @@ import dbConnect from "~/lib/dbConnect";
 import CommunityPost from "~/models/community";
 import ProgressLog from "~/models/progress";
 
-export type HouseName = "Gryffindor" | "Slytherin" | "Ravenclaw" | "Hufflepuff";
+export type HouseName = "KERNEL" | "FRACTAL" | "SIGNAL" | "VECTOR";
 
 /**
  * Get house details with stats

@@ -6,7 +6,7 @@ import { getSession } from "~/auth/server";
 import { users } from "~/db/schema/auth-schema";
 
 /**
- * Fetches the user's assigned Hogwarts house and sorting status.
+ * Fetches the user's assigned nerds house and sorting status.
  * This is a read-only server action to be used across the application
  * for server-authoritative display of the user's state.
  *

@@ -42,10 +42,10 @@ export async function submitSortingAnswers(
 
   const allAnswers = await db.select().from(answers);
   const houseScores: Record<string, number> = {
-    Gryffindor: 0,
-    Slytherin: 0,
-    Ravenclaw: 0,
-    Hufflepuff: 0,
+    KERNEL: 0,
+    FRACTAL: 0,
+    SIGNAL: 0,
+    VECTOR: 0,
   };
 
   for (const selection of selectedAnswers) {

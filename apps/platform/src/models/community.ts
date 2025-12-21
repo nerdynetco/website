@@ -20,7 +20,7 @@ export type CommunityPostTypeWithId = RawCommunityPostType & {
   views: number;
   likes: string[];
   savedBy: string[];
-  house?: 'Gryffindor' | 'Slytherin' | 'Ravenclaw' | 'Hufflepuff';
+  house?: 'KERNEL' | 'FRACTAL' | 'SIGNAL' | 'VECTOR';
   upvotes: string[];
   downvotes: string[];
   reactions: {
@@ -53,7 +53,7 @@ interface ICommunityPost extends Document {
   savedBy: string[];
   updatedAt: Date;
   createdAt: Date;
-  house?: 'Gryffindor' | 'Slytherin' | 'Ravenclaw' | 'Hufflepuff';
+  house?: 'KERNEL' | 'FRACTAL' | 'SIGNAL' | 'VECTOR';
 }
 
 const communityPostSchema = new Schema<ICommunityPost>(
@@ -78,7 +78,7 @@ const communityPostSchema = new Schema<ICommunityPost>(
       username: { type: String, required: true },
     },
     subCategory: { type: String, enum: SUB_CATEGORY_TYPES, default: null },
-    house: { type: String, enum: ['Gryffindor', 'Slytherin', 'Ravenclaw', 'Hufflepuff'], default: null },
+    house: { type: String, enum: ['KERNEL', 'FRACTAL', 'SIGNAL', 'VECTOR'], default: null },
   },
   {
     timestamps: true,

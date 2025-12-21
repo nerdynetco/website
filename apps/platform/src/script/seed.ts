@@ -47,19 +47,19 @@ async function seedQuestionsAndAnswers() {
 /**
  * Main Seed Runner
  */
-export async function seedHogwartsQuiz() {
-  console.log("🪄 Seeding Hogwarts Houses...");
+export async function seedNerdsQuiz() {
+  console.log("🪄 Seeding Nerds Houses...");
   await seedHouses();
 
   console.log("📜 Seeding Questions & Answers...");
   await seedQuestionsAndAnswers();
 
-  console.log("✅ Hogwarts Quiz Seed Complete");
+  console.log("✅ Nerds Quiz Seed Complete");
 }
 
 // Run directly if executed as script
 if (require.main === module) {
-  seedHogwartsQuiz()
+  seedNerdsQuiz()
     .then(() => process.exit(0))
     .catch((err) => {
       console.error("❌ Seed failed", err);

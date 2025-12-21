@@ -239,7 +239,7 @@ export default async function HousePage({ params }: Props) {
   const { houseName } = await params;
 
   // Validate house name
-  const validHouses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"];
+  const validHouses = ["KERNEL", "FRACTAL", "SIGNAL", "VECTOR"];
   if (!validHouses.includes(houseName)) {
     notFound();
   }
