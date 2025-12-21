@@ -4,7 +4,7 @@ import z from "zod";
 
 export const CATEGORY_TYPES = [
   "academics",
-  "departmental",
+  "research",
   "technology",
   "design",
   "activities",
@@ -14,7 +14,7 @@ export const SUB_CATEGORY_TYPES: readonly string[] = DEPARTMENT_CODES;
 
 export const CATEGORY_IMAGES: Record<string, string> = {
   academics: "/assets/images/community.academics.png",
-  departmental: "/assets/images/community.departmental.png",
+  research: "/assets/images/community.departmental.png",
   technology: "/assets/images/community.technology.png",
   design: "/assets/images/community.design.png",
   activities: "/assets/images/community.activities.png",
@@ -34,10 +34,10 @@ export const CATEGORIES: {
     description: "Explore academic communities",
   },
   {
-    name: "Departmental",
-    value: "departmental",
-    image: CATEGORY_IMAGES.departmental,
-    description: "Discover departmental communities",
+    name: "Research",
+    value: "research",
+    image: CATEGORY_IMAGES.research,
+    description: "Discover research communities",
   },
   {
     name: "Technology",
