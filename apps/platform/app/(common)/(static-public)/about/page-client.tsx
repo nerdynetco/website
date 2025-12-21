@@ -91,7 +91,7 @@ export default function AboutPage() {
             {/* Buttons (Standard HTML/Tailwind to avoid missing component errors) */}
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link 
-                href="/register"
+                href="/auth/sign-in"
                 className="inline-flex h-12 items-center justify-center rounded-full bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
                 <Zap className="mr-2 size-4" /> Start Building
@@ -236,7 +236,7 @@ export default function AboutPage() {
                     The Sorting Hat is waiting. Join a House, find your team, and start building your legacy.
                 </p>
                 <Link 
-                  href="/register"
+                  href="/auth/sign-in"
                   className="inline-flex h-12 items-center justify-center rounded-full bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
                 >
                     Join Nerdy Network
