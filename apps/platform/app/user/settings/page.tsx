@@ -2,6 +2,8 @@ import { ChevronRight, Moon, UserRoundCog } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Settings",
   description: "Manage your preferences",

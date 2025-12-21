@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { brand_themes, BrandThemeType } from "@/components/common/theme-switcher";
 import { Separator } from "@/components/ui/separator";
 import useStorage from "@/hooks/useLocalStorage";
