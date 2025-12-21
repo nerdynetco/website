@@ -60,6 +60,8 @@ export const RAW_PRIVATE_ROUTES: RoutePattern[] = [
   ...dashboardRoutes.map((role) => `/${role.toLowerCase()}/*`),
   "/dashboard", // catch-all for dashboard
   "/dashboard/*", // catch-all for dashboard routes
+  "/user", // user redirect route
+  "/user/*", // user settings and sub-routes
   "/api/*", // catch-all for API routes
   "/announcements/create",
   "/community/create",
