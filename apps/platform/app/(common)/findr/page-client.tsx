@@ -79,12 +79,6 @@ export default function FindrPageClient() {
                 <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
                   Co-Founder
                 </span>
-                <motion.div
-                  className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-full"
-                  initial={{ scaleX: 0 }}
-                  animate={heroIn ? { scaleX: 1 } : { scaleX: 0 }}
-                  transition={{ delay: 0.8, duration: 0.6 }}
-                />
               </span>
               <br />
               With a Swipe
@@ -100,22 +94,25 @@ export default function FindrPageClient() {
             </motion.p>
 
             {/* CTA Buttons */}
-            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <button
-                disabled
-                className="inline-flex h-14 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 px-8 text-base font-medium text-white shadow-lg transition-all hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            <motion.div
+              variants={fadeInUp}
+              className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
+            >
+              <Link
+                href="https://forms.gle/97MVoopse5mE8YdF9"
+                className="inline-flex h-14 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 px-8 text-base font-medium text-white shadow-lg transition-all hover:shadow-xl hover:scale-105"
               >
-                <Heart className="mr-2 size-5 fill-white" /> 
+                <Heart className="mr-2 size-5 fill-white" />
                 Join Waitlist
-              </button>
-              <Link 
+              </Link>
+
+              <Link
                 href="/about"
                 className="inline-flex h-14 items-center justify-center rounded-full border border-input bg-background/50 backdrop-blur-md px-8 text-base font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
               >
                 Learn More <ChevronRight className="ml-1 size-5" />
               </Link>
             </motion.div>
-
             {/* Stats Preview */}
             <motion.div
               variants={fadeInUp}
