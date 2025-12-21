@@ -1,10 +1,12 @@
-# Nerdy Network
+# nerdy network
+
+[![Ask DeepWiki - Docs](https://deepwiki.com/badge.svg)](https://deepwiki.com/kanakkholwal/college-ecosystem)
 
 **Nerdy Network** is a builder-focused social platform for nerds - think GitHub + Twitter + Hogwarts for builders. It's where nerds log their daily progress, compete in house challenges, and build in public together.
 
 ## What is Nerdy Network?
 
-Nerdy Network transforms the traditional college experience into a gamified builder community:
+Nerdy Network transforms the traditional nerds experience into a gamified builder community:
 
 - **Build in Public**: Daily progress logging with 365-day GitHub-style heatmaps
 - **House System**: Hogwarts-inspired houses with weekly competitions and leaderboards
@@ -74,7 +76,7 @@ Nerdy Network transforms the traditional college experience into a gamified buil
 ## Project Structure
 
 ```bash
-/v0.3
+/website
   /apps
     /platform          # Main App (Next.js)
       /app             # App Router pages
@@ -145,26 +147,6 @@ npm run dev
 ```
 
 Visit `http://localhost:3000` to see the app!
-
-## Current Status
-
-**Overall Progress**: 40/77 features (52%)
-
-### Completed Systems (100%)
-- House System (6/6 features)
-- Gamification (7/7 features)
-- House Points (4/4 features)
-- Moderation (5/5 features)
-
-### In Progress
-- Build in Public (9/11 - 82%)
-- Community Features (8/12 - 67%)
-- User Profile (4/6 - 67%)
-
-### Planned
-- Notifications (0/5)
-- Projects System (0/6)
-- Discovery Features (0/8)
 
 ## Contributing
 
