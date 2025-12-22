@@ -1,0 +1,216 @@
+{
+  "starters": {
+    "title": "Start here",
+    "description": "Set out on your journey by building your own website, then move on to multiplayer games and collaborative web apps.",
+    "slugs": [
+      "personal_website",
+      "splatter_paint",
+      "sound_galaxy",
+      "muse",
+      "particle_physics",
+      "teachable_machine",
+      "synth",
+      "draw_dino"
+    ]
+  },
+  "sprig": {
+    "title": "Sprig",
+    "description": "Draw, make music, and craft games in our web-based Sprig editor. Build an original game and we'll ship you a Sprig kit!",
+    "slugs": [
+      "sprig", 
+      "sprig_first_game", 
+      "sprig_dodge"
+    ]
+  },
+  "web": {
+    "title": "Web development",
+    "description": "Learn how to make things happen on the web, from basic JavaScript to web APIs",
+    "slugs": [
+      "whackamole",
+      "find_bigfoot",
+      "synth",
+      "colorful_grammar",
+      "speak_colors",
+      "teachable_machine",
+      "dashboard",
+      "tunes",
+      "julia_fractals",
+      "particle_physics",
+      "geometric_pattern",
+      "3d_models_with_zdog",
+      "simple_clock",
+      "collaborative_sketch",
+      "tree_machine",
+      "stopwatch",
+      "custom_search",
+      "konami_code",
+      "javascript_typing_test",
+      "hackide",
+      "hosting",
+      "login_auth",
+      "responsive_navbar",
+      "parallax_effect",
+      "contact_form_serverless",
+      "javascript_snake",
+      "weather_app",
+      "speech_recognition",
+      "web_chat",
+      "spinning_wheel",
+      "custom_link_shortener",
+      "image_editor",
+      "vr_worlds",
+      "password_generator",
+      "drum_pad",
+      "weather_grapher",
+      "pixel_art_pad",
+      "ar_with_echoar",
+      "chart_js",
+      "kuizzy",
+      "painting_app",
+      "website_mockup_generator",
+      "meme_generator",
+      "thunderstorm"
+    ]
+  },
+  "games": {
+    "title": "Games",
+    "description": "Learn to build games, both locally and on the web!",
+    "slugs": [
+      "dodge",
+      "platformer",
+      "pico_8_maze",
+      "memory_game",
+      "orpheus_run",
+      "atari_breakout",
+      "hangman",
+      "rust_text_game",
+      "kaboom"
+    ]
+  },
+  "python": {
+    "title": "Python",
+    "description": "Learn to use one of the most powerful and beginner-friendly languages.",
+    "slugs": [
+      "selenium",
+      "vigenere_cipher",
+      "passwordcracker",
+      "robot_emails",
+      "python_turtle",
+      "py_christmas",
+      "python_stock_viewer",
+      "python_data_viz",
+      "flask_quote_generator",
+      "python_snake",
+      "python_pokedex",
+      "fibonacci_sequence",
+      "3d_mountain",
+      "rock_paper_scissors",
+      "drawing_shapes",
+      "space_game",
+      "flask_login",
+      "dungeon_crawler",
+      "dice_rolling",
+      "python_password_generator",
+      "read_the_internet",
+      "smart_calculator",
+      "scalable_snowman",
+      "tic_tac_toe",
+      "pycuriosity"
+    ]
+  },
+  "react": {
+    "title": "React",
+    "description": "Learn to use one of the most popular JavaScript frameworks out there.",
+    "slugs": [
+      "nextjs_starter",
+      "dicegamereactnative",
+      "react_calendar",
+      "quotes_generator",
+      "fetch_a_hack_clubber",
+      "react_calculator",
+      "populous_cities",
+      "clicker_game",
+      "full_stack_todo_app",
+      "color_scheme_generator"
+    ]
+  },
+  "chrome": {
+    "title": "Chrome Extensions",
+    "description": "Extend the functionality of the world's most popular browser.",
+    "slugs": ["popup_chrome_extension", "bitex"]
+  },
+  "bots": {
+    "title": "Chat bots",
+    "description": "Make all sorts of bots for popular platforms such as Discord & Slack.",
+    "slugs": [
+      "hello_bot",
+      "pyramid_discord_bot",
+      "slack_todo_list",
+      "discord_bot_with_rust",
+      "slack_pfp",
+      "wikibot",
+      "discord_message_bot"
+    ]
+  },
+  "ml": {
+    "title": "Machine Learning",
+    "description": "Learn how to make machines learn with these fun projects!",
+    "slugs": ["teachable_machine", "feature_extractor", "digit_recognition"]
+  },
+  "node-deno": {
+    "title": "Node & Deno: JavaScript runtimes",
+    "description": "Running JS outside of the web can be a lot of fun.",
+    "slugs": [
+      "cli_app_with_nodejs",
+      "web_scraping",
+      "json_db",
+      "hcload",
+      "firstnpmpackage"
+    ]
+  },
+  "hardware": {
+    "title": "Hardware",
+    "description": "Bring projects from cyberspace to the real world with Arduinos and more.",
+    "slugs": [
+      "blink",
+      "temperature_monitor",
+      "iotworkshop",
+      "coffin_dance_arduino",
+      "micro_bit_flappy_bird",
+      "seven_segment_display",
+      "line_following_robot"
+    ]
+  },
+  "c-sharp": {
+    "title": "C#",
+    "description": "Learn all about C#, a language that can be used for almost anything.",
+    "slugs": ["craps_simulator", "dialogue_tree", "battleship", "mad_libs"]
+  },
+  "hack_island": {
+    "title": "Adventures of Hack Island!",
+    "description": "Help Orpheus and the people of Hack Island! Learn about cybersecurity while completing an adventure in this experimental new workshop series.",
+    "slugs": ["help_orpheus", "save_hack_club_bank"]
+  },
+  "functional_programming": {
+    "title": "Functional Programming with JavaScript",
+    "description": "Learn the functional programming paradigm in JavaScript with this experimental new series.",
+    "slugs": [
+      "functional_programming_1",
+      "functional_programming_2",
+      "functional_programming_3"
+    ]
+  },
+  "misc": {
+    "title": "Miscellaneous",
+    "description": "Workshops not properly categorized yet.",
+    "slugs": [
+      "personal_website_2",
+      "kahoot",
+      "api_canvas",
+      "minecraft_modding",
+      "shared_clipboard",
+      "scrapbook_css",
+      "your_first_ship"
+    ]
+  }
+}
