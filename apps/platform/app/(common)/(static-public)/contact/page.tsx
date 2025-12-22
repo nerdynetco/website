@@ -74,7 +74,7 @@ export default function AboutPage() {
                     title="Email Support"
                     desc="For partnerships & help"
                     action="Send Email"
-                    href={`mailto:${appConfig.contact || "hello@nerdynet.co"}`}
+                    href={`mailto:${"hello@nerdynet.co"}`}
                 />
                 <ContactCard 
                     icon={Github}
