@@ -1,6 +1,6 @@
 # nerdy network
 
-[![Ask DeepWiki - Docs](https://deepwiki.com/badge.svg)](https://deepwiki.com/kanakkholwal/college-ecosystem)
+[![Ask DeepWiki - Docs](https://deepwiki.com/badge.svg)](https://deepwiki.com/nerdynetco/website)
 
 **Nerdy Network** is a builder-focused social platform for nerds - think GitHub + Twitter + Hogwarts for builders. It's where nerds log their daily progress, compete in house challenges, and build in public together.
 
