@@ -92,10 +92,12 @@ export default function ProgressLogForm() {
   return (
     <div className="space-y-6">
       {/* Quick Action Buttons */}
-      <Card>
-        <CardHeader>
+      <Card className="border-primary/10">
+        <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2">
-            <Zap className="size-5" />
+            <div className="p-1.5 rounded-lg bg-primary/10">
+              <Zap className="size-4 text-primary" />
+            </div>
             Quick Log
           </CardTitle>
           <CardDescription>
@@ -104,19 +106,33 @@ export default function ProgressLogForm() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {PROGRESS_CATEGORIES.map((category) => (
-              <Button
-                key={category}
-                variant="outline"
-                onClick={() => handleQuickLog(category)}
-                className="h-auto py-3 flex flex-col gap-1"
-              >
-                <span className="font-semibold">{category}</span>
-                <span className="text-xs text-muted-foreground">
-                  I built today
-                </span>
-              </Button>
-            ))}
+            {PROGRESS_CATEGORIES.map((category, i) => {
+              const categoryStyles: Record<string, { gradient: string; border: string; icon: string }> = {
+                Code: { gradient: "from-blue-500/10 to-cyan-500/5", border: "border-blue-500/20 hover:border-blue-500/40", icon: "💻" },
+                Design: { gradient: "from-pink-500/10 to-purple-500/5", border: "border-pink-500/20 hover:border-pink-500/40", icon: "🎨" },
+                Research: { gradient: "from-amber-500/10 to-orange-500/5", border: "border-amber-500/20 hover:border-amber-500/40", icon: "🔍" },
+                Shipping: { gradient: "from-green-500/10 to-emerald-500/5", border: "border-green-500/20 hover:border-green-500/40", icon: "🚀" },
+                Learning: { gradient: "from-violet-500/10 to-indigo-500/5", border: "border-violet-500/20 hover:border-violet-500/40", icon: "📚" },
+                Planning: { gradient: "from-slate-500/10 to-zinc-500/5", border: "border-slate-500/20 hover:border-slate-500/40", icon: "📋" },
+              };
+              const style = categoryStyles[category] || categoryStyles.Code;
+
+              return (
+                <Button
+                  key={category}
+                  variant="outline"
+                  onClick={() => handleQuickLog(category)}
+                  className={`h-auto py-4 flex flex-col gap-1.5 bg-gradient-to-br ${style.gradient} ${style.border} hover:scale-[1.02] transition-all duration-200`}
+                  style={{ animationDelay: `${i * 50}ms` }}
+                >
+                  <span className="text-lg">{style.icon}</span>
+                  <span className="font-semibold">{category}</span>
+                  <span className="text-xs text-muted-foreground">
+                    I built today
+                  </span>
+                </Button>
+              );
+            })}
           </div>
         </CardContent>
       </Card>
