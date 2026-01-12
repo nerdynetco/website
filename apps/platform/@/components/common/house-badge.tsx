@@ -11,26 +11,30 @@ interface HouseBadgeProps {
   className?: string;
 }
 
-const houseColors: Record<HouseName, { bg: string; text: string; border: string }> = {
+const houseColors: Record<HouseName, { bg: string; text: string; border: string; glow: string }> = {
   KERNEL: {
-    bg: "bg-red-500/10 dark:bg-red-500/20",
-    text: "text-red-700 dark:text-red-400",
-    border: "border-red-500/30",
+    bg: "bg-gradient-to-r from-red-500/15 to-orange-500/10 dark:from-red-500/25 dark:to-orange-500/15",
+    text: "text-red-600 dark:text-red-300 font-semibold",
+    border: "border-red-500/40 dark:border-red-400/30",
+    glow: "shadow-[0_0_12px_-3px_rgba(239,68,68,0.4)]",
   },
   FRACTAL: {
-    bg: "bg-green-500/10 dark:bg-green-500/20",
-    text: "text-green-700 dark:text-green-400",
-    border: "border-green-500/30",
+    bg: "bg-gradient-to-r from-emerald-500/15 to-green-500/10 dark:from-emerald-500/25 dark:to-green-500/15",
+    text: "text-emerald-600 dark:text-emerald-300 font-semibold",
+    border: "border-emerald-500/40 dark:border-emerald-400/30",
+    glow: "shadow-[0_0_12px_-3px_rgba(16,185,129,0.4)]",
   },
   SIGNAL: {
-    bg: "bg-blue-500/10 dark:bg-blue-500/20",
-    text: "text-blue-700 dark:text-blue-400",
-    border: "border-blue-500/30",
+    bg: "bg-gradient-to-r from-blue-500/15 to-cyan-500/10 dark:from-blue-500/25 dark:to-cyan-500/15",
+    text: "text-blue-600 dark:text-blue-300 font-semibold",
+    border: "border-blue-500/40 dark:border-blue-400/30",
+    glow: "shadow-[0_0_12px_-3px_rgba(59,130,246,0.4)]",
   },
   VECTOR: {
-    bg: "bg-yellow-500/10 dark:bg-yellow-500/20",
-    text: "text-yellow-700 dark:text-yellow-400",
-    border: "border-yellow-500/30",
+    bg: "bg-gradient-to-r from-amber-500/15 to-yellow-500/10 dark:from-amber-500/25 dark:to-yellow-500/15",
+    text: "text-amber-600 dark:text-amber-300 font-semibold",
+    border: "border-amber-500/40 dark:border-amber-400/30",
+    glow: "shadow-[0_0_12px_-3px_rgba(245,158,11,0.4)]",
   },
 };
 
@@ -58,19 +62,21 @@ export default function HouseBadge({
   const colors = isValidHouse
     ? houseColors[house as HouseName]
     : {
-        bg: "bg-muted",
-        text: "text-muted-foreground",
-        border: "border-border",
-      };
+      bg: "bg-muted",
+      text: "text-muted-foreground",
+      border: "border-border",
+      glow: "",
+    };
 
   return (
     <Badge
       variant="outline"
       className={cn(
-        "font-medium border",
+        "font-medium border transition-all duration-200 hover:scale-105",
         colors.bg,
         colors.text,
         colors.border,
+        colors.glow,
         sizeClasses[size],
         className
       )}
