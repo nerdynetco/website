@@ -127,7 +127,7 @@ export function IntroSection({
           <StaggerChildrenItem className="flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full">
             <ButtonLink
               size="lg"
-              href={user ? `/${user.role}` : "/auth/sign-in"}
+              href={user ? `/${user.role}/settings` : "/auth/sign-in"}
               variant="default"
               className="h-12 px-8 text-base shadow-lg shadow-primary/20"
             >
@@ -428,7 +428,7 @@ export function HeroSection({ user }: HeroSection) {
         >
           <ButtonLink
             variant="dark"
-            href={user ? `/${user.role}` : "/auth/sign-in"}
+            href={user ? `/${user.role}/settings` : "/auth/sign-in"}
             effect="shineHover"
             transition="damped"
             shadow="dark"
