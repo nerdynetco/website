@@ -65,37 +65,24 @@ jobs:
       - name: 🔍 Detect changed projects
         id: changed
         run: |
-          if git diff --quiet HEAD^ HEAD ./apps/platform; then
-            echo "platform_changed=false" >> $GITHUB_OUTPUT
+          # `git diff --quiet X || echo ...` treats non-existent paths as
+          # "changed" (git exits non-zero with "bad revision"), so guard
+          # each diff with a directory check first.
+          if [ -d ./apps/platform ] && ! git diff --quiet HEAD^ HEAD -- ./apps/platform; then
+            echo "platform_changed=true" >> "$GITHUB_OUTPUT"
           else
-            echo "platform_changed=true" >> $GITHUB_OUTPUT
+            echo "platform_changed=false" >> "$GITHUB_OUTPUT"
           fi
-          if git diff --quiet HEAD^ HEAD ./apps/website; then
-            echo "website_changed=false" >> $GITHUB_OUTPUT
+          if [ -d ./apps/mail-server ] && ! git diff --quiet HEAD^ HEAD -- ./apps/mail-server; then
+            echo "mail_server_changed=true" >> "$GITHUB_OUTPUT"
           else
-            echo "website_changed=true" >> $GITHUB_OUTPUT
-          fi
-          if git diff --quiet HEAD^ HEAD ./apps/server; then
-            echo "server_changed=false" >> $GITHUB_OUTPUT
-          else
-            echo "server_changed=true" >> $GITHUB_OUTPUT
-          fi
-          if git diff --quiet HEAD^ HEAD ./apps/mail-server; then
-            echo "mail_server_changed=false" >> $GITHUB_OUTPUT
-          else
-            echo "mail_server_changed=true" >> $GITHUB_OUTPUT
+            echo "mail_server_changed=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: 🚀 Run Turbo lint selectively
         run: |
           if [ "${{ steps.changed.outputs.platform_changed }}" = "true" ]; then
             npx turbo run lint --cache-dir=.turbo --filter=platform
-          fi
-          if [ "${{ steps.changed.outputs.website_changed }}" = "true" ]; then
-            npx turbo run lint --cache-dir=.turbo --filter=website
-          fi
-          if [ "${{ steps.changed.outputs.server_changed }}" = "true" ]; then
-            npx turbo run lint --cache-dir=.turbo --filter=server
           fi
           if [ "${{ steps.changed.outputs.mail_server_changed }}" = "true" ]; then
             npx turbo run lint --cache-dir=.turbo --filter=mail-server

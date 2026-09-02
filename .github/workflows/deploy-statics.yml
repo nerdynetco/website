@@ -27,8 +27,20 @@ jobs:
       - name: 🔍 Detect changed projects
         id: changed
         run: |
-              git diff --quiet HEAD^ HEAD ./apps/builder-club || echo "builder_club_changed=true" >> $GITHUB_OUTPUT
-              git diff --quiet HEAD^ HEAD ./apps/website || echo "website_changed=true" >> $GITHUB_OUTPUT
+              # Helper: a path is "changed" only if it exists AND `git diff` reports changes.
+              # `git diff` exits non-zero on missing paths, so the previous `|| echo` form
+              # incorrectly reported non-existent apps as "changed" and triggered downstream
+              # steps against a lockfile that doesn't exist at the repo root.
+              if [ -d ./apps/builder-club ] && ! git diff --quiet HEAD^ HEAD -- ./apps/builder-club; then
+                echo "builder_club_changed=true" >> $GITHUB_OUTPUT
+              else
+                echo "builder_club_changed=false" >> $GITHUB_OUTPUT
+              fi
+              if [ -d ./apps/website ] && ! git diff --quiet HEAD^ HEAD -- ./apps/website; then
+                echo "website_changed=true" >> $GITHUB_OUTPUT
+              else
+                echo "website_changed=false" >> $GITHUB_OUTPUT
+              fi
       
       # - uses: pnpm/action-setup@v4
 
@@ -38,6 +50,7 @@ jobs:
         with:
           node-version: 20.x
           cache: "npm"
+          cache-dependency-path: apps/builder-club/package-lock.json,apps/website/package-lock.json
 
       - name: 💾 Cache Vercel CLI
         uses: actions/cache@v4
