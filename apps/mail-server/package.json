@@ -21,7 +21,7 @@
     "@types/node": "^22",
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^19",
-    "typescript": "^5"
+    "typescript": "^7"
   },
   "packageManager": "pnpm@9.15.2",
   "overrides": {
