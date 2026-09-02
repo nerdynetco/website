@@ -1,0 +1,28 @@
+# Dependabot configuration
+# Docs: https://docs.github.com/code-security/dependabot/dependabot-versioning/dependabot.yml-reference
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/apps/platform"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "npm"
+    # Open security-update PRs automatically for any open Dependabot alert.
+    # https://docs.github.com/code-security/dependabot/dependabot-security-updates/configuring-dependabot-security-updates
+    # (security-updates is implicitly enabled when vulnerability-alerts is on
+    # at the repo level; this block just makes Dependabot rebase/auto-merge
+    # behaviour explicit.)
+
+  - package-ecosystem: "npm"
+    directory: "/apps/mail-server"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "npm"
