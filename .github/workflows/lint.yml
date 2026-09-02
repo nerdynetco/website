@@ -68,20 +68,22 @@ jobs:
           # `git diff --quiet X || echo ...` treats non-existent paths as
           # "changed" (git exits non-zero with "bad revision"), so guard
           # each diff with a directory check first.
-          for app in platform mail-server; do
-            key="${app//-/_}_changed"
-            if [ -d "./apps/$app" ] && ! git diff --quiet HEAD^ HEAD -- "./apps/$app"; then
-              echo "$key=true" >> "$GITHUB_OUTPUT"
-            else
-              echo "$key=false" >> "$GITHUB_OUTPUT"
-            fi
-          done
+          if [ -d ./apps/platform ] && ! git diff --quiet HEAD^ HEAD -- ./apps/platform; then
+            echo "platform_changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "platform_changed=false" >> "$GITHUB_OUTPUT"
+          fi
+          if [ -d ./apps/mail-server ] && ! git diff --quiet HEAD^ HEAD -- ./apps/mail-server; then
+            echo "mail_server_changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "mail_server_changed=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: 🚀 Run Turbo lint selectively
         run: |
-          for app in platform mail-server; do
-            key="${app//-/_}_changed"
-            if [ "${{ steps.changed.outputs.$key }}" = "true" ]; then
-              npx turbo run lint --cache-dir=.turbo --filter="$app"
-            fi
-          done
+          if [ "${{ steps.changed.outputs.platform_changed }}" = "true" ]; then
+            npx turbo run lint --cache-dir=.turbo --filter=platform
+          fi
+          if [ "${{ steps.changed.outputs.mail_server_changed }}" = "true" ]; then
+            npx turbo run lint --cache-dir=.turbo --filter=mail-server
+          fi
