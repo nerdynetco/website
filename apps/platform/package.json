@@ -99,7 +99,7 @@
     "html-to-image": "^1.11.13",
     "ioredis": "5.7.0",
     "lucide-react": "^0.541.0",
-    "mongoose": "^8.24.1",
+    "mongoose": "^9.9.4",
     "nanoid": "^5.1.16",
     "nexo-editor": "^2.3.2",
     "nexo-mdx": "^0.9.0",
