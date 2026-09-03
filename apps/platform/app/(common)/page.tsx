@@ -1,5 +1,4 @@
 import { AnimatedTestimonials } from "@/components/animation/animated-testimonials";
-import { BackgroundBeamsWithCollision } from "@/components/animation/bg-beam-with-collision";
 import { StaggerChildrenContainer, StaggerChildrenItem } from "@/components/animation/motion";
 import { HeaderBar } from "@/components/common/header-bar";
 import { RouterCard } from "@/components/common/router-card";
@@ -22,8 +21,10 @@ import { FeatureSection, IntroSection } from "./client";
 const RESOURCES_LIMIT = 6;
 
 export default async function HomePage() {
-  const houseState = await getUserHouse();
   const session = await getSession();
+  const houseState = session?.user
+    ? await getUserHouse()
+    : { house: null, isSorted: false };
   const isSorted = houseState.isSorted;
   const house = houseState.house;
   const links = getLinksByRole(session?.user?.role ?? ROLES_ENUMS.BUILDER, quick_links);
@@ -70,9 +71,9 @@ export default async function HomePage() {
       </script>
 
       {/* Visual hook: High contrast intro */}
-      <BackgroundBeamsWithCollision className="h-auto md:h-auto md:min-h-96 flex flex-col justify-center">
+      <div className="h-auto md:h-auto md:min-h-96 flex flex-col justify-center">
         <IntroSection user={session?.user} stats={publicStats} house={house} />
-      </BackgroundBeamsWithCollision>
+      </div>
 
       <div className="w-full max-w-(--max-app-width) mx-auto flex flex-col gap-24 py-16">
 

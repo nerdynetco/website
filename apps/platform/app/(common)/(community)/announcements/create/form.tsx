@@ -1,5 +1,6 @@
 "use client";
 
+import NexoEditorField from "@/components/application/nexo-editor-field";
 import { DateTimePicker } from "@/components/extended/date-n-time";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -29,7 +30,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { ButtonLink } from "@/components/utils/link";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { Content, JSONContent } from "@tiptap/react";
+import type { Content } from "@tiptap/react";
 import {
   ArrowLeft,
   BellRing,
@@ -38,8 +39,6 @@ import {
   Loader2,
   Megaphone
 } from "lucide-react";
-import { defaultExtensions, NexoEditor, renderToMarkdown } from "nexo-editor";
-import "nexo-editor/index.css";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -62,13 +61,6 @@ const defaultContent = {
     },
   ],
 };
-
-function convertToMd(data: Content) {
-  return renderToMarkdown({
-    content: data as JSONContent,
-    extensions: defaultExtensions,
-  });
-}
 
 export default function CreateAnnouncement() {
   const router = useRouter();
@@ -171,11 +163,11 @@ export default function CreateAnnouncement() {
                   <FormItem>
                     <FormControl>
                       <div className="min-h-[400px] prose prose-zinc dark:prose-invert max-w-none">
-                        <NexoEditor
+                        <NexoEditorField
                           content={field.value as Content}
-                          onChange={(content) => {
+                          onChange={(content, markdown) => {
                             field.onChange(content);
-                            form.setValue("content", convertToMd(content as Content));
+                            form.setValue("content", markdown);
                           }}
                           placeholder="What needs to be announced?"
                         />

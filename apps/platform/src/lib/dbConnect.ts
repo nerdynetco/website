@@ -11,11 +11,6 @@ declare const global: {
   };
 };
 
-if (!MONGODB_URI) {
-  console.warn("Can't access MONGODB_URI in dbConnect.ts");
-  throw new Error("Please define the MONGODB_URI environment variable");
-}
-
 const defaultDb =
   process.env.NODE_ENV === "production" ? "production" : "testing";
 
@@ -38,6 +33,13 @@ const mongoOptions: ConnectOptions = {
   appName: "nith",
 };
 
+function getMongoUri(): string {
+  if (!MONGODB_URI) {
+    throw new Error("Please define the MONGODB_URI environment variable");
+  }
+  return MONGODB_URI;
+}
+
 async function dbConnect(dbName: string = defaultDb): Promise<Mongoose> {
   if (mongooseCache.conn) {
     return mongooseCache.conn;
@@ -52,7 +54,7 @@ async function dbConnect(dbName: string = defaultDb): Promise<Mongoose> {
     try {
       mongoose.set("strictQuery", false);
       mongooseCache.promise = mongoose
-        .connect(MONGODB_URI, opts)
+        .connect(getMongoUri(), opts)
         .then((mongoose) => {
           console.log("Connected to MongoDB to database:", dbName);
           return mongoose;
@@ -79,7 +81,7 @@ async function getMongoClient(
 
   if (!mongoClientCache.promise) {
     try {
-      const client = new MongoClient(MONGODB_URI, mongoOptions);
+      const client = new MongoClient(getMongoUri(), mongoOptions);
       mongoClientCache.promise = client.connect().then((connectedClient) => {
         console.log("Connected to MongoDB via native client");
         return connectedClient;

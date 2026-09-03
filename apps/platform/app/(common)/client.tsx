@@ -2,7 +2,7 @@
 
 import { AnimatedGradientText } from "@/components/animation/animated-shiny-text";
 import { FloatingElements } from "@/components/animation/floating-elements";
-import { StaggerChildrenContainer, StaggerChildrenItem } from "@/components/animation/motion";
+import { StaggerChildrenContainer } from "@/components/animation/motion";
 import { NumberTicker } from "@/components/animation/number-ticker";
 import FeatureCard from "@/components/common/feature-card";
 import { Icon } from "@/components/icons";
@@ -44,15 +44,6 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { type: "spring", stiffness: 100, damping: 20 },
-  },
-};
-
 // --- DATA ---
 const popular_features = [
   { name: "Results", icon: FileText, href: "/results" },
@@ -83,15 +74,12 @@ export function IntroSection({
 
   return (
     <section className="relative w-full max-w-(--max-app-width) mx-auto pt-12 pb-20 lg:pt-24 lg:pb-32 px-4 md:px-6">
-      <StaggerChildrenContainer
-        className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
-        variants={containerVariants}
-      >
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         {/* LEFT COLUMN: Copy & CTAs */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
 
           {/* Greeting / Badge */}
-          <StaggerChildrenItem>
+          <div>
             {user ? (
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary">
                 <span className="relative flex h-2 w-2">
@@ -110,10 +98,10 @@ export function IntroSection({
                 <span className="font-bold">New</span> {appConfig.name} 2.0 is live
               </Badge>
             )}
-          </StaggerChildrenItem>
+          </div>
 
           {/* Headlines */}
-          <StaggerChildrenItem>
+          <div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground text-balance">
               the <span className="bg-linear-to-l from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text text-transparent">internet{"'"}s messiest,</span> <br className="hidden lg:block" />
               <span className="bg-linear-to-l from-emerald-500 from-10% via-sky-500 via-30% to-indigo-500 to-90% bg-clip-text text-transparent">nerdiest corner.</span> <br className="hidden lg:block" />
@@ -121,10 +109,10 @@ export function IntroSection({
             <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 text-balance leading-relaxed">
               {appConfig.description || "A community for student builders to showcase projects, track progress, and connect with fellow builders. Build in public, compete in houses, and level up together."}
             </p>
-          </StaggerChildrenItem>
+          </div>
 
           {/* Buttons */}
-          <StaggerChildrenItem className="flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full">
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full">
             <ButtonLink
               size="lg"
               href={user ? `/${user.role}/settings` : "/auth/sign-in"}
@@ -142,10 +130,10 @@ export function IntroSection({
             >
               Explore Features
             </ButtonLink>
-          </StaggerChildrenItem>
+          </div>
 
           {/* Stats / Social Proof */}
-          <StaggerChildrenItem className="pt-4 w-full">
+          <div className="pt-4 w-full">
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-4 border-t border-border/50 pt-6">
               {displayStats.map((stat, i) => (
                 <div key={i} className="flex flex-col">
@@ -156,7 +144,7 @@ export function IntroSection({
                 </div>
               ))}
             </div>
-          </StaggerChildrenItem>
+          </div>
         </div>
 
         {/* RIGHT COLUMN: Visuals */}
@@ -166,7 +154,7 @@ export function IntroSection({
           {/* Decorative gradients behind mockup */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/10 blur-[100px] -z-10 rounded-full pointer-events-none mix-blend-screen" />
         </div>
-      </StaggerChildrenContainer>
+      </div>
     </section>
   );
 }

@@ -1,18 +1,8 @@
 "use client";
 
 import ProfileDropdown from "@/components/common/profile-dropdown";
-import { Icon } from "@/components/icons";
 import { ApplicationInfo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
-import {
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-} from "@/components/ui/command";
 import { AuthButtonLink, ButtonLink } from "@/components/utils/link";
 import {
   NavLink,
@@ -23,13 +13,11 @@ import {
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import {
+  ArrowUp,
   ArrowUpRight,
-  LayoutDashboard,
-  LogIn,
   Search,
-  Settings,
-  User
 } from "lucide-react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useMemo, useState } from "react";
@@ -38,10 +26,10 @@ import { twUtility } from "../utils/tailwind-classes";
 import { NavTabs } from "./nav-tabs";
 import { ThemePopover, ThemeSwitcher } from "./theme-switcher";
 
-const loggedInList = [
-  { path: "/dashboard", title: "Dashboard", icon: LayoutDashboard },
-  { path: "/dashboard/settings", title: "Settings", icon: Settings },
-];
+const LazyCommandPalette = dynamic(
+  () => import("./command-palette").then((mod) => mod.CommandPalette),
+  { ssr: false }
+);
 
 interface NavbarProps {
   user?: Session["user"];
@@ -170,7 +158,6 @@ interface QuickLinksProps extends NavbarProps {
 
 export function QuickLinks({ user, publicLinks }: QuickLinksProps) {
   const [open, setOpen] = useState(false);
-  const isLoggedIn = !!user;
 
   // Handle Ctrl/Cmd + K
   React.useEffect(() => {
@@ -208,60 +195,14 @@ export function QuickLinks({ user, publicLinks }: QuickLinksProps) {
         <Search className="size-5" />
       </Button>
 
-      <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type to search ecosystem..." />
-        <CommandList className="py-2">
-          <CommandEmpty>No results found.</CommandEmpty>
-          
-          <CommandGroup heading="Suggestions">
-            {publicLinks.map((item, index) => (
-              <CommandItem key={`cmd-${index}`} asChild>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center justify-between group cursor-pointer"
-                >
-                  <div className="flex items-center">
-                    {item.Icon ? <item.Icon className="mr-3 size-4 text-muted-foreground group-hover:text-primary transition-colors" /> : <ArrowUpRight className="mr-3 size-4" />}
-                    <div className="flex flex-col">
-                        <span className="font-medium">{item.title}</span>
-                        {item.description && <span className="text-xs text-muted-foreground font-normal line-clamp-1">{item.description}</span>}
-                    </div>
-                  </div>
-                  <ArrowUpRight className="size-3 opacity-0 group-hover:opacity-50 -translate-x-2 group-hover:translate-x-0 transition-all" />
-                </Link>
-              </CommandItem>
-            ))}
-          </CommandGroup>
-          
-          <CommandSeparator className="my-2"/>
-
-          {isLoggedIn ? (
-             <CommandGroup heading="Account">
-                <CommandItem onSelect={() => setOpen(false)}>
-                    <Link href={`/u/${user.username}`} className="flex items-center w-full">
-                        <User className="mr-2 size-4" /> Profile
-                    </Link>
-                </CommandItem>
-                {loggedInList.map((item, i) => (
-                    <CommandItem key={i} onSelect={() => setOpen(false)}>
-                        <Link href={item.path} className="flex items-center w-full">
-                            <item.icon className="mr-2 size-4" /> {item.title}
-                        </Link>
-                    </CommandItem>
-                ))}
-             </CommandGroup>
-          ) : (
-             <CommandGroup heading="Authentication">
-                <CommandItem onSelect={() => setOpen(false)}>
-                     <Link href="/auth/sign-in" className="flex items-center w-full">
-                        <LogIn className="mr-2 size-4" /> Sign In
-                     </Link>
-                </CommandItem>
-             </CommandGroup>
-          )}
-        </CommandList>
-      </CommandDialog>
+      {open && (
+        <LazyCommandPalette
+          open={open}
+          onOpenChange={setOpen}
+          user={user}
+          publicLinks={publicLinks}
+        />
+      )}
     </>
   );
 }
@@ -314,7 +255,7 @@ export function GoToTopButton({ className }: { className?: string }) {
       size="sm"
       className={cn("text-xs text-muted-foreground hover:text-foreground", className)}
     >
-      Back to Top <Icon name="arrow-up" className="ml-2 size-3" />
+      Back to Top <ArrowUp className="ml-2 size-3" />
     </ButtonLink>
   );
 }

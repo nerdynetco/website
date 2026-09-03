@@ -16,7 +16,7 @@ import { ArrowLeft, CheckCircle2, KeyRound, Loader2, Lock } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import * as z from "zod";
 import { authClient } from "~/auth/client";
 

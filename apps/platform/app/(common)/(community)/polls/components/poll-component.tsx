@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Check, Clock } from "lucide-react";
+import { ArrowRight, Check, Clock, ThumbsUp } from "lucide-react";
 import Link from "next/link";
-import { BiUpvote } from "react-icons/bi";
 import type { PollType } from "src/models/poll";
 import type { Session } from "~/auth/client";
-import DeletePoll from "./delete-poll";
+import DeletePollLazy from "./delete-poll-lazy";
 import { ClosingBadge } from "./poll-timer";
 
 export default function PollComponent({
@@ -58,7 +57,7 @@ export default function PollComponent({
       {/* Stats */}
       <div className="flex flex-wrap items-center gap-3 mt-2 text-xs">
         <span className="rounded-full bg-muted/70 text-muted-foreground px-3 py-1 inline-flex items-center gap-1.5">
-          <BiUpvote className="w-4 h-4" />
+          <ThumbsUp className="w-4 h-4" />
           {poll.votes.length} votes
         </span>
         <span className="rounded-full bg-muted/70 text-muted-foreground px-3 py-1 inline-flex items-center gap-1.5">
@@ -69,7 +68,7 @@ export default function PollComponent({
 
       {/* Actions */}
       <div className="flex items-center justify-end gap-2">
-        {user?.id === poll.createdBy && <DeletePoll pollId={poll._id} />}
+        {user?.id === poll.createdBy && <DeletePollLazy pollId={poll._id} />}
         {!closesAlready && (
           <Button
             variant="default"

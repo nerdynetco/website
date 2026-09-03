@@ -1,29 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 // provider.tsx
 "use client";
-import { Toaster } from "@/components/ui/sonner";
 import { all_themes } from "@/constants/theme";
 import { cn } from "@/lib/utils";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { Next13ProgressBar } from "next13-progressbar";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import type React from "react";
 import { Toaster as HotToaster } from "react-hot-toast";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: false,
-      refetchOnReconnect: true,
-    },
-  },
-});
-
 export function Provider({ children }: { children: React.ReactNode }) {
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <Next13ProgressBar
         height="4px"
         color="var(--primary)"
@@ -52,7 +40,6 @@ export function Provider({ children }: { children: React.ReactNode }) {
           duration: 2500,
         }}
       />
-      <Toaster position="bottom-right" richColors />
       {/* COMMENTED OUT - Visitor tracking disabled */}
       {/* <div className="fixed bottom-2 right-2 left-auto top-auto z-50 flex gap-1 items-center">
         <span>
@@ -66,7 +53,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
           />
         </span>
       </div> */}
-    </QueryClientProvider>
+    </>
   );
 }
 

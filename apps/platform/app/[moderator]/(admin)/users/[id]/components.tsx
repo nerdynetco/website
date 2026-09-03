@@ -69,7 +69,7 @@ const formSchema = z.object({
   
   // Academic
   gender: genderSchema,
-  department: z.string({ required_error: "Department is required" }),
+  department: z.string("Department is required"),
   
   // Access
   role: z.string(), // Primary Role

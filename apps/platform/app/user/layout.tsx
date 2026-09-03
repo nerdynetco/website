@@ -1,4 +1,3 @@
-import { FlickeringGrid } from "@/components/animation/flikering-grid";
 import AdUnit from "@/components/common/adsense";
 import Navbar from "@/components/common/app-navbar";
 import { AppSidebar } from "@/components/common/sidebar/app-sidebar";
@@ -36,16 +35,7 @@ export default async function UserLayout({ children }: UserLayoutProps) {
           user={session.user}
           impersonatedBy={session.session.impersonatedBy}
         />
-        <div className="absolute top-0 left-0 z-0 w-full min-h-80 [mask-image:linear-gradient(to_top,transparent_25%,black_95%)]">
-          <FlickeringGrid
-            className="absolute top-0 left-0 size-full"
-            squareSize={4}
-            gridGap={6}
-            color="#6B7280"
-            maxOpacity={0.2}
-            flickerChance={0.05}
-          />
-        </div>
+        <div className="absolute top-0 left-0 z-0 w-full min-h-80 pattern_feed opacity-30 [mask-image:linear-gradient(to_top,transparent_25%,black_95%)]" />
 
         <main className="content p-4 px-2 md:p-6 z-2 @container space-y-10 min-h-screen h-full">
           {children}

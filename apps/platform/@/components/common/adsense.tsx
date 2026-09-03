@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import Script from "next/script";
 import React, { useEffect, useId, useRef } from "react";
 import { appConfig } from "~/project.config";
 import "./adsense.css";
@@ -55,19 +56,30 @@ const AdUnit: React.FC<AdUnitProps> = ({ adSlot, className }) => {
   }, [pathname, adSlot]); // refresh ad when route or slot changes
 
   return (
-    <div className={cn("adsense-container empty:hidden", className)} id={`adsense-${id}`}>
-      <ins
-        key={id}
-        id={`adsbygoogle-${id}`}
-        ref={adRef}
-        className="adsbygoogle"
-        style={{ display: "block" }}
-        data-ad-client={appConfig.verifications.google_adsense}
-        data-ad-slot={adsProps.adSlot}
-        data-ad-format={adsProps.adFormat}
-        data-full-width-responsive="true"
-      />
-    </div>
+    <>
+      {process.env.NODE_ENV === "production" && (
+        <Script
+          id="adsense-script"
+          strategy="lazyOnload"
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${appConfig.verifications.google_adsense}`}
+          crossOrigin="anonymous"
+        />
+      )}
+      <div className={cn("adsense-container empty:hidden", className)} id={`adsense-${id}`}>
+        <ins
+          key={id}
+          id={`adsbygoogle-${id}`}
+          ref={adRef}
+          className="adsbygoogle"
+          style={{ display: "block" }}
+          data-ad-client={appConfig.verifications.google_adsense}
+          data-ad-slot={adsProps.adSlot}
+          data-ad-format={adsProps.adFormat}
+          data-full-width-responsive="true"
+        />
+      </div>
+    </>
   );
 };
 
