@@ -9,11 +9,6 @@ import toast from "react-hot-toast";
 import { deletePoll } from "src/actions/common.poll"; // keep if you still need server-side cleanup
 import type { PollType } from "src/models/poll";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
-
 export default function DeletePoll({ pollId }: { pollId: PollType["_id"] }) {
   const [loading, setLoading] = useState(false);
 
@@ -23,6 +18,15 @@ export default function DeletePoll({ pollId }: { pollId: PollType["_id"] }) {
     toast
       .promise(
         (async () => {
+          const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+          const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+          if (!supabaseUrl || !supabaseAnonKey) {
+            throw new Error("Supabase is not configured");
+          }
+
+          const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
           // 1. Supabase delete
           const { error } = await supabase
             .from("polls")

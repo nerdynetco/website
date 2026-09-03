@@ -5,16 +5,11 @@ import { cn } from "@/lib/utils";
 import { createClient } from "@supabase/supabase-js";
 import { motion } from "framer-motion";
 import { CircleCheckBig, Dot, MousePointerClick } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 
 import type { PollType } from "src/models/poll";
 import type { Session } from "~/auth/client";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
 
 interface PollingProps {
   poll: PollType;
@@ -25,9 +20,23 @@ interface PollingProps {
 
 export default function Polling({ poll, user, updateVotes }: PollingProps) {
   const [voteData, setVoteData] = useState<PollType["votes"]>(poll.votes);
+  const supabase = useMemo(() => {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+      return null;
+    }
+
+    return createClient(supabaseUrl, supabaseAnonKey);
+  }, []);
 
   const handleVote = async (option: string) => {
     if (!voteData) return;
+    if (!supabase) {
+      toast.error("Voting is not configured");
+      return;
+    }
 
     let updatedVotes = [...voteData];
     const existingVoteIndex = updatedVotes.findIndex(
@@ -68,6 +77,8 @@ export default function Polling({ poll, user, updateVotes }: PollingProps) {
   }, [updateVotes, voteData]);
 
   useEffect(() => {
+    if (!supabase) return;
+
     const channel = supabase
       .channel(`polls-${poll._id}`)
       .on(
@@ -89,7 +100,7 @@ export default function Polling({ poll, user, updateVotes }: PollingProps) {
       handleSync();
       supabase.removeChannel(channel);
     };
-  }, [handleSync, poll._id]);
+  }, [handleSync, poll._id, supabase]);
 
   useEffect(() => {
     if (poll.votes.length !== voteData.length) {

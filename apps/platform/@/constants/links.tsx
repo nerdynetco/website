@@ -1,21 +1,20 @@
 import {
-  PiBedDuotone,
-  PiCalendarPlusDuotone,
-  PiChartBarDuotone,
-  PiChartLineUpDuotone, // CGPA/Merit Allotment
-  PiClockCounterClockwiseDuotone,
-  PiFileCsvDuotone,
-  PiGearDuotone,
-  PiGhostDuotone,
-  PiGiftDuotone,
-  PiMegaphoneDuotone,
-  PiSquaresFourDuotone, // Bulk Import (Spreadsheet)
-  PiStudentDuotone,
-  PiTicketDuotone,
-  PiUserCheckDuotone,
-  PiUserListDuotone,
-  PiUsersThreeDuotone
-} from "react-icons/pi";
+  Bed,
+  CalendarPlus,
+  ChartBar,
+  ChartLine,
+  FileSpreadsheet,
+  Gift,
+  History,
+  Megaphone,
+  Settings,
+  Sparkles,
+  SquareDashedMousePointer,
+  Ticket,
+  UserCheck,
+  UserRound,
+  UsersRound,
+} from "lucide-react";
 // Brand Icons (Keep these as they are specific logos)
 import { BsInstagram } from "react-icons/bs";
 import { FiLinkedin } from "react-icons/fi";
@@ -63,7 +62,7 @@ export const quick_links: RouterCardLink[] = [
   {
     title: "Community",
     href: "/community",
-    Icon: PiUsersThreeDuotone,
+    Icon: UsersRound,
     description: "Connect with peers in discussion forums.",
     allowed_roles: ["*"],
     category: "community",
@@ -71,7 +70,7 @@ export const quick_links: RouterCardLink[] = [
   {
     title: "Progress",
     href: "/progress",
-    Icon: PiChartLineUpDuotone,
+    Icon: ChartLine,
     description: "Log your daily building progress.",
     allowed_roles: ["*"],
     category: "community",
@@ -79,7 +78,7 @@ export const quick_links: RouterCardLink[] = [
   {
     title: "House Cup",
     href: "/house-cup",
-    Icon: PiGiftDuotone,
+    Icon: Gift,
     description: "View house standings and leaderboard.",
     allowed_roles: ["*"],
     category: "community",
@@ -87,7 +86,7 @@ export const quick_links: RouterCardLink[] = [
   {
     title: "Announcements",
     href: "/announcements",
-    Icon: PiMegaphoneDuotone,
+    Icon: Megaphone,
     description: "Official news and campus updates.",
     allowed_roles: ["*"],
     category: "community",
@@ -95,7 +94,7 @@ export const quick_links: RouterCardLink[] = [
   {
     title: "Polls",
     href: "/polls",
-    Icon: PiChartBarDuotone,
+    Icon: ChartBar,
     description: "Vote on campus opinions and surveys.",
     allowed_roles: ["*"],
     category: "community",
@@ -106,42 +105,42 @@ export const quick_links: RouterCardLink[] = [
 export const sidebar_links: rawLinkType[] = [
   {
     title: "Dashboard",
-    icon: PiSquaresFourDuotone,
+    icon: SquareDashedMousePointer,
     path: "",
     allowed_roles: Object.values(ROLES),
     category: "none",
   },
   {
     title: "Community",
-    icon: PiUsersThreeDuotone,
+    icon: UsersRound,
     path: "/community",
     allowed_roles: Object.values(ROLES),
     category: "view",
   },
   {
     title: "Progress",
-    icon: PiChartLineUpDuotone,
+    icon: ChartLine,
     path: "/progress",
     allowed_roles: Object.values(ROLES),
     category: "action",
   },
   {
     title: "Profile",
-    icon: PiUserCheckDuotone,
+    icon: UserCheck,
     path: "/profile",
     allowed_roles: Object.values(ROLES),
     category: "view",
   },
   {
     title: "Moderation",
-    icon: PiGearDuotone,
+    icon: Settings,
     path: "/moderation",
     allowed_roles: [ROLES_ENUMS.ADMIN],
     category: "action",
   },
   {
     title: "User Management",
-    icon: PiUserListDuotone,
+    icon: UsersRound,
     path: "/users",
     allowed_roles: [ROLES_ENUMS.ADMIN],
     category: "metrics",
@@ -155,7 +154,7 @@ export const sidebar_links: rawLinkType[] = [
   },
   {
     title: "Events",
-    icon: PiCalendarPlusDuotone,
+    icon: CalendarPlus,
     path: "/events",
     category: "view",
     allowed_roles: [ROLES_ENUMS.ADMIN],
@@ -169,7 +168,7 @@ export const sidebar_links: rawLinkType[] = [
   },
   {
     title: "Settings",
-    icon: PiGearDuotone,
+    icon: Settings,
     path: "/settings",
     category: "view",
     allowed_roles: Object.values(ROLES),
@@ -270,7 +269,7 @@ if (user) {
     title: "Settings",
     href: "/user/settings",
     description: "User settings.",
-    Icon: PiGearDuotone,
+    Icon: Settings,
     category: "dashboard",
     allowed_roles: ["*"],
   });
@@ -282,7 +281,7 @@ if (user?.role === ROLES_ENUMS.ADMIN) {
     title: "Dashboard",
     href: "/admin",
     description: "Admin dashboard",
-    Icon: PiSquaresFourDuotone,
+    Icon: SquareDashedMousePointer,
     category: "dashboard",
     allowed_roles: [ROLES_ENUMS.ADMIN],
   });
@@ -291,7 +290,7 @@ if (user?.role === ROLES_ENUMS.ADMIN) {
     title: "Settings",
     href: "/admin/settings",
     description: "Admin settings",
-    Icon: PiGearDuotone,
+    Icon: Settings,
     category: "dashboard",
     allowed_roles: [ROLES_ENUMS.ADMIN],
   });
@@ -302,7 +301,7 @@ if (!linksByRole.some(l => l.title === "Findr")) {
         title: "Findr",
         href: "/findr",
         description: "Find your people.",
-        Icon: PiGhostDuotone,
+        Icon: Sparkles,
         category: "community",
         allowed_roles: ["student"],
         isNew: true
@@ -320,38 +319,50 @@ export const getHostelRoutes = (moderator: string, slug: string) =>
       title: "Outpass Requests",
       description: "Approve or reject student exit requests.",
       href: `/${moderator}/h/${slug}/outpass-requests`,
-      Icon: PiTicketDuotone,
+      Icon: Ticket,
+      allowed_roles: ["*"],
+      category: "hostel",
     },
     {
       title: "Activity Logs",
       description: "View history of entry and exit movements.",
       href: `/${moderator}/h/${slug}/outpass-logs`,
-      Icon: PiClockCounterClockwiseDuotone,
+      Icon: History,
+      allowed_roles: ["*"],
+      category: "hostel",
     },
     {
       title: "Hostelers Directory",
       description: "Manage student database and residents.",
       href: `/${moderator}/h/${slug}/students`,
-      Icon: PiStudentDuotone,
+      Icon: UserRound,
+      allowed_roles: ["*"],
+      category: "hostel",
     },
     {
       title: "Room Management",
       description: "View occupancy and room details.",
       href: `/${moderator}/h/${slug}/rooms`,
-      Icon: PiBedDuotone, 
+      Icon: Bed,
+      allowed_roles: ["*"],
+      category: "hostel",
     },
     {
       title: "CGPA Allotment",
       description: "Automated room allocation based on merit.",
-      Icon: PiChartLineUpDuotone,
+      Icon: ChartLine,
       href: `/${moderator}/h/${slug}/allotment`,
       disabled: true,
+      allowed_roles: ["*"],
+      category: "hostel",
     },
     {
       title: "Bulk Import (Excel)",
       description: "Upload room allotment data via spreadsheet.",
-      Icon: PiFileCsvDuotone,
+      Icon: FileSpreadsheet,
       href: `/${moderator}/h/${slug}/allotment-by-excel`,
+      allowed_roles: ["*"],
+      category: "hostel",
     },
   ] as RouterCardLink[];
 

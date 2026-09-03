@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { getSession } from "~/auth/server";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
-import ProgressHeatmap, { ProgressHeatmapSkeleton } from "app/(common)/progress/heatmap";
+import ProgressHeatmapLazy from "app/(common)/progress/heatmap-lazy";
+import ProgressHeatmapSkeleton from "app/(common)/progress/heatmap-skeleton";
 import { getYearProgressLogs, calculateStreak } from "~/actions/progress";
 import { getUserBadges, getBadgeProgress } from "~/actions/badges";
 import dbConnect from "~/lib/dbConnect";
@@ -112,7 +113,7 @@ async function ProfileContent({ userId }: { userId: string }) {
       <BadgeProgress progress={badgeProgress} />
 
       {/* Progress Heatmap */}
-      <ProgressHeatmap logs={logs} streak={streak} />
+      <ProgressHeatmapLazy logs={logs} streak={streak} />
     </div>
   );
 }

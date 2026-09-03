@@ -1,10 +1,10 @@
 import fs from "fs";
-import matter from "gray-matter";
 import { type MDXRemoteSerializeResult } from "next-mdx-remote";
 import path from "path";
 import { calculateReadingTime } from "~/utils/string";
 
 import { compileMdxSource } from "@/markdown/utils";
+import { parseFrontmatter } from "./frontmatter";
 import { TocItem } from "remark-flexible-toc";
 
 export const resourcesTypes = [
@@ -102,7 +102,7 @@ export async function getMDXBySlug(
 
   const source = fs.readFileSync(fullPath, "utf-8");
   const mdxSource = await compileMdxSource(source);
-  const frontmatter = matter(source);
+  const frontmatter = parseFrontmatter(source);
   // Validate required frontmatter fields
   // console.log('Frontmatter:', frontmatter.data);
   frontmatter.data.readingTime = calculateReadingTime(source || "");
@@ -125,14 +125,16 @@ export async function getAllMDXMeta(
 ): Promise<ResourceFrontMatter[]> {
   assertResourceType(type);
   const files = getMDXFiles(type);
-  const meta = await Promise.all(
-    files.map(async (filename) => {
-      const slug = filename.replace(/\.mdx?$/, "");
-      const { frontmatter } = await getMDXBySlug(type, slug);
-      frontmatter.type = type; // Add type to frontmatter
-      return frontmatter;
-    })
-  );
+  const meta = files.map((filename) => {
+    const slug = filename.replace(/\.mdx?$/, "");
+    const fullPath = path.join(RESOURCE_DIR, type, filename);
+    const source = fs.readFileSync(fullPath, "utf-8");
+    const frontmatter = parseFrontmatter(source).data as ResourceFrontMatter;
+    frontmatter.slug = frontmatter.slug || slug;
+    frontmatter.readingTime = calculateReadingTime(source || "");
+    frontmatter.type = type;
+    return frontmatter;
+  });
 
   return meta
     .filter((item) => item?.published !== false && item?.draft !== true) // Filter out unpublished or draft items

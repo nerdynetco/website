@@ -1,4 +1,3 @@
-import { FlickeringGrid } from "@/components/animation/flikering-grid";
 import AdUnit from "@/components/common/adsense";
 import Navbar from "@/components/common/app-navbar";
 import { AppSidebar } from "@/components/common/sidebar/app-sidebar";
@@ -54,16 +53,7 @@ export default async function DashboardLayout({
           user={session.user}
           impersonatedBy={session.session.impersonatedBy}
         />
-        <div className="absolute top-0 left-0 z-0 w-full min-h-80 [mask-image:linear-gradient(to_top,transparent_25%,black_95%)]">
-          <FlickeringGrid
-            className="absolute top-0 left-0 size-full"
-            squareSize={4}
-            gridGap={6}
-            color="#6B7280"
-            maxOpacity={0.2}
-            flickerChance={0.05}
-          />
-        </div>
+        <div className="absolute top-0 left-0 z-0 w-full min-h-80 pattern_feed opacity-30 [mask-image:linear-gradient(to_top,transparent_25%,black_95%)]" />
         {/* <div
           aria-hidden="true"
           className="absolute inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20 -z-[1]"

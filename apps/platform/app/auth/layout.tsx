@@ -1,11 +1,8 @@
-import { FlickeringGrid } from "@/components/animation/flikering-grid";
 import { ApplicationInfo } from "@/components/logo";
 import { ButtonLink } from "@/components/utils/link";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
-export const dynamic = "force-dynamic";
 
 type LayoutProps = Readonly<{
   children: React.ReactNode;
@@ -25,14 +22,7 @@ export default function AuthLayout({ children }: LayoutProps) {
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex overflow-hidden">
         {/* Ambient Background */}
         <div className="absolute inset-0 bg-zinc-900" />
-        <FlickeringGrid
-          className="absolute inset-0 z-0 size-full opacity-20"
-          squareSize={4}
-          gridGap={6}
-          color="#FFFFFF"
-          maxOpacity={0.2}
-          flickerChance={0.05}
-        />
+        <div className="absolute inset-0 z-0 pattern_feed opacity-20" />
 
         {/* Content */}
         <Link href="/" className="relative z-20 flex items-center text-lg font-medium">

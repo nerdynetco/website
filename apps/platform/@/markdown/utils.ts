@@ -1,4 +1,3 @@
-import matter from "gray-matter";
 import { type MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -9,6 +8,7 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { highlight } from "remark-sugar-high";
 import { unified } from "unified";
+import { parseFrontmatter } from "~/lib/markdown/frontmatter";
 
 import remarkFlexibleToc, { TocItem } from "remark-flexible-toc";
 
@@ -66,7 +66,7 @@ export const compileMdxSource = async (
  */
 async function getTocFromMDX(content: string): Promise<TocItem[]> {
   try {
-    const { content: mdxContentWithoutFrontmatter } = matter(content);
+    const { content: mdxContentWithoutFrontmatter } = parseFrontmatter(content);
     const file = await unified()
       .use(remarkFlexibleToc, {
         tocName: "toc",

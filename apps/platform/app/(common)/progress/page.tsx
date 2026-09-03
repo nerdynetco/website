@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { getSession } from "~/auth/server";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import ProgressLogForm from "./log-form";
-import ProgressHeatmap, { ProgressHeatmapSkeleton } from "./heatmap";
+import ProgressLogFormLazy from "./log-form-lazy";
+import ProgressHeatmapLazy from "./heatmap-lazy";
+import ProgressHeatmapSkeleton from "./heatmap-skeleton";
 import { getYearProgressLogs, calculateStreak } from "~/actions/progress";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrendingUp } from "lucide-react";
@@ -20,7 +21,7 @@ async function ProgressStats({ userId }: { userId: string }) {
     calculateStreak(userId),
   ]);
 
-  return <ProgressHeatmap logs={logs} streak={streak} />;
+  return <ProgressHeatmapLazy logs={logs} streak={streak} />;
 }
 
 export default async function ProgressPage() {
@@ -45,7 +46,7 @@ export default async function ProgressPage() {
         </div>
 
         {/* Progress Form */}
-        <ProgressLogForm />
+        <ProgressLogFormLazy />
 
         <Separator className="my-8" />
 

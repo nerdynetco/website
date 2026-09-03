@@ -6,7 +6,7 @@ import {
     getPollsCreatedByLoggedInUser,
 } from "~//actions/common.poll";
 import type { PollType } from "~/models/poll";
-import CreatePoll from "./components/create-poll";
+import CreatePollLazy from "./components/create-poll-lazy";
 import PollComponent from "./components/poll-component";
 
 import AdUnit from "@/components/common/adsense";
@@ -102,7 +102,7 @@ export default async function PollsPage(props: {
                     {polls[idx].length}
                   </Badge>
                 </h3>
-                {tab.id === "your-polls" && <CreatePoll />}
+                {tab.id === "your-polls" && <CreatePollLazy />}
               </div>
 
               {polls[idx].length === 0 ? (

@@ -49,27 +49,30 @@ export async function middleware(request: NextRequest) {
       return NextResponse.rewrite(new URL(`/clubs/${subdomain}`, request.url));
     }
   }
-  const searchParams = request.nextUrl.searchParams;
   const isPrivateRoute = PRIVATE_ROUTES.some((route) =>
     isRouteAllowed(pathname, route.pattern)
   );
 
-  // if the request is for the sign-in page, allow it to pass through
-  const { data: session } = await betterFetch<Session>(
-    "/api/auth/get-session",
-    {
-      baseURL: request.nextUrl.origin,
-      headers: {
-        //get the cookie from the request
-        cookie: request.headers.get("cookie") || "",
-      },
+  let session: Session | null = null;
+  let sessionLoaded = false;
+  const getRequestSession = async () => {
+    if (!sessionLoaded) {
+      const { data } = await betterFetch<Session>("/api/auth/get-session", {
+        baseURL: request.nextUrl.origin,
+        headers: {
+          cookie: request.headers.get("cookie") || "",
+        },
+      });
+      session = data ?? null;
+      sessionLoaded = true;
     }
-  );
-
-
+    return session;
+  };
 
   // Exception for the error page : Production issue on Google Sign in
-  if (pathname === "/api/auth/error" && session) {
+  const errorPageSession =
+    pathname === "/api/auth/error" ? await getRequestSession() : null;
+  if (pathname === "/api/auth/error" && errorPageSession) {
     console.log(pathname, "is accessed by an authenticated user");
     const error = request.nextUrl.searchParams.get("error");
     // api/auth/error?error=please_restart_the_process
@@ -87,9 +90,10 @@ export async function middleware(request: NextRequest) {
     }
   }
   if (isPrivateRoute) {
+    const privateRouteSession = await getRequestSession();
     // console.log("Private route accessed:", pathname);
     if (
-      session &&
+      privateRouteSession &&
       !UN_PROTECTED_API_ROUTES.some((route) =>
         new RegExp(route.replace(/\*/g, ".*")).test(request.nextUrl.pathname)
       )
@@ -100,7 +104,7 @@ export async function middleware(request: NextRequest) {
         .find((path) => request.nextUrl.pathname.startsWith(path))
         ?.slice(1) as (typeof dashboardRoutes)[number];
       if (matchedRole) {
-        const authCheck = checkAuthorization(matchedRole, session);
+        const authCheck = checkAuthorization(matchedRole, privateRouteSession);
 
         if (!authCheck.authorized) {
           if (request.method === "GET") {
@@ -148,10 +152,10 @@ export async function middleware(request: NextRequest) {
         if (request.nextUrl.pathname.startsWith("/dashboard")) {
           return NextResponse.redirect(
             new URL(
-              request.nextUrl.pathname.replace(
-                "/dashboard",
-                session?.user.role
-              ),
+                request.nextUrl.pathname.replace(
+                  "/dashboard",
+                  privateRouteSession?.user.role
+                ),
               request.url
             )
           );
@@ -165,7 +169,9 @@ export async function middleware(request: NextRequest) {
     url.searchParams.set("next", request.url);
     return NextResponse.redirect(url);
   }
-  if (session) {
+  const signInPageSession =
+    pathname === SIGN_IN_PATH ? await getRequestSession() : null;
+  if (signInPageSession) {
     if (pathname === SIGN_IN_PATH) {
       url.pathname = "/";
       url.search = url.searchParams.toString();
@@ -182,7 +188,8 @@ export async function middleware(request: NextRequest) {
     // console.log("targetUrl", targetUrl);
     const nextRedirect = request.nextUrl.searchParams.get("redirect");
 
-    if (targetUrl && nextRedirect !== "false" && session) {
+    const nextTargetSession = await getRequestSession();
+    if (targetUrl && nextRedirect !== "false" && nextTargetSession) {
       const targetUrlObj = new URL(targetUrl, appConfig.url);
       return NextResponse.redirect(targetUrlObj);
     }
